@@ -3,9 +3,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { setLogin, setCard, setId } from "../../redux/slice/auth";
-import { useCustomDispatch, useCustomSelector } from "../../hooks/redux";
-import { postData, getData } from "../../services/Login";
+import { setLogin, setCard, setId } from "../redux/slice/auth";
+import { useCustomDispatch, useCustomSelector } from "../hooks/redux";
+import { postData, getData } from "../services/Login";
 
 const FormLogin = () => {
   const [pageType, setPageType] = useState("login");

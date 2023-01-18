@@ -1,5 +1,5 @@
 import React from 'react';
-import FormLogin from "./Form";
+import FormLogin from "../../components/FormLogin";
 import { useCustomSelector } from "../../hooks/redux";
 
 type Props = {}
