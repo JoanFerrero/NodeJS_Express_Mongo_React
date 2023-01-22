@@ -36,6 +36,7 @@ const authSlice = createSlice({
       state.user = null
       state.token = null
       state.card = []
+      state.id = null
     },
     setProducts: (state, action) => {
       state.products = action.payload.data;

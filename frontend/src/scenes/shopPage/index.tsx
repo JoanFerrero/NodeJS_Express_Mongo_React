@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useCustomDispatch, useCustomSelector } from "../../hooks/redux";
 import { setProducts } from "../../redux/slice/auth";
-import {  getData1 } from '../../services/Login';
+import {  getData1 } from '../../services';
 import ProductCard from "../../components/ProductCard";
 
 type Props = {}

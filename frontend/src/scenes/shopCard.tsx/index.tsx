@@ -1,14 +1,9 @@
-import { useCustomSelector } from "../../hooks/redux";
 import ProductTrolley from "../../components/ProductTrolley";
-type Props = {}
 
-const CardPage = (props: Props) => {
-
-  const { auth } = useCustomSelector((state) => state);
-  
+const CardPage = () => {
   return (
     <>
-      <div className="  bg-white">
+      <div className="bg-white">
         <ProductTrolley />
       </div>
     </>

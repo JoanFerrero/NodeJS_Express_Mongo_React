@@ -1,6 +1,7 @@
 import { useCustomSelector, useCustomDispatch } from "../hooks/redux";
 import { setCard, setNotCard } from "../redux/slice/auth";
-import { getData } from '../services/Login';
+import { getData } from '../services';
+import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from "react-router-dom";
 
 const ProductTrolley = () => {
@@ -14,20 +15,29 @@ const ProductTrolley = () => {
   const navigate = useNavigate()
 
   const removeProd = async (idP: String) => {
-    if(id) {
-      dispatch(setNotCard())
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
+    dispatch(setNotCard())
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`
       }
-      const request = getData(`/card/${id}/${idP}`, config)
-      console.log(request)
-      const data = await (await request).data
-      dispatch(setCard({ data }))
-    } else {
-      navigate('/login')
     }
+    const request = getData(`/card/${id}/${idP}`, config)
+    const data = await (await request).data
+    dispatch(setCard({ data }))
+    toast.promise(request, {
+      loading: 'Loading',
+      success: 'Successfully Remove',
+      error: 'Error Remove',
+    });
+  }
+
+  const endShop = () => {
+    toast.success('Thank you for trusting Nobull!')
+
+    setTimeout(() => { 
+      navigate("/shop") 
+      dispatch(setNotCard())
+    }, 3000)
   }
 
   products.map(({price}: any) => (
@@ -35,6 +45,7 @@ const ProductTrolley = () => {
   ))
   return (
     <>
+      <Toaster />
       <div className="flex shadow-md ">
         <div className="w-3/4 bg-white px-10 py-10">
           <div className="flex justify-between border-b pb-8">
@@ -103,7 +114,7 @@ const ProductTrolley = () => {
               <span>Total cost</span>
               <span>{finalprice + 10}€</span>
             </div>
-            <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">Checkout</button>
+            <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full" onClick={() => endShop()}>Checkout</button>
           </div>
         </div>
       </div>

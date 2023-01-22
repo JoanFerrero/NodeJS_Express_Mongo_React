@@ -1,14 +1,13 @@
 import { useCustomSelector, useCustomDispatch } from "../hooks/redux"
 import { setCard, setNotCard } from "../redux/slice/auth";
-import { useNavigate } from "react-router-dom";
-import { getData } from '../services/Login';
+import { getData } from '../services';
+import toast, { Toaster } from 'react-hot-toast';
 
 const ProductCard = ({Name,description,picturePath,price,_id}: any) => {
   const { auth } = useCustomSelector((state) => state);
   const dispatch = useCustomDispatch();
   const token = auth.token
   const id = auth.id
-  const navigate = useNavigate()
 
   const addProd = async (idP: String) => {
     if(id) {
@@ -20,14 +19,16 @@ const ProductCard = ({Name,description,picturePath,price,_id}: any) => {
       }
       const request = getData(`/card/${id}/${idP}`, config)
       const data = await (await request).data
+      toast.success('Successfully Added!')
       dispatch(setCard({ data }))
     } else {
-      navigate('/login')
+      toast.error('Need Login!')
     }
   }
 
   return (
     <>
+      <Toaster />
       <div className="card w-96 bg-base-100 shadow-xl" id={_id}>
         <figure><img src={`http://localhost:3001/assets/${picturePath}`} alt="Shoes" /></figure>
         <div className="card-body">

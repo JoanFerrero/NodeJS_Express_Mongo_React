@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { setLogin, setCard, setId } from "../redux/slice/auth";
 import { useCustomDispatch, useCustomSelector } from "../hooks/redux";
-import { postData, getData } from "../services/Login";
+import { postData, getData } from "../services";
 
 const FormLogin = () => {
   const [pageType, setPageType] = useState("login");
@@ -94,7 +94,7 @@ const FormLogin = () => {
                 <Form.Control
                   name='location'
                   type="text" 
-                  placeholder="Last Name" 
+                  placeholder="Location" 
                   required
                   onChange={onChange}
                 />
@@ -104,7 +104,7 @@ const FormLogin = () => {
                 <Form.Control
                   name='emailreg'
                   type="email" 
-                  placeholder="email" 
+                  placeholder="Email" 
                   required
                   onChange={onChange}
                 />
@@ -127,7 +127,7 @@ const FormLogin = () => {
                 <Form.Label>Email</Form.Label>
                 <Form.Control 
                   name='emaillog'
-                  type="text" 
+                  type="email" 
                   placeholder="Email" 
                   required 
                   onChange={onChange}
