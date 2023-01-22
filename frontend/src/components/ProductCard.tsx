@@ -18,9 +18,8 @@ const ProductCard = ({Name,description,picturePath,price,_id}: any) => {
           Authorization: `Bearer ${token}`
         }
       }
-        const request = getData(`/card/${id}/${idP}`, config)
+      const request = getData(`/card/${id}/${idP}`, config)
       const data = await (await request).data
-      console.log(data)
       dispatch(setCard({ data }))
     } else {
       navigate('/login')
