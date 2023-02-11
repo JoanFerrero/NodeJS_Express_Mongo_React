@@ -1,6 +1,6 @@
 import { useCustomSelector, useCustomDispatch } from "./redux";
 import { setCard, setNotCard } from "../redux/slice/auth";
-import { getData } from '../services';
+import ProductsService from '../services/Products/ProductsService'
 import toast from 'react-hot-toast';
 import { useNavigate } from "react-router-dom";
 
@@ -19,7 +19,7 @@ export function useTrolley () {
         Authorization: `Bearer ${token}`
       }
     }
-    const request = getData(`/card/${id}/${idP}`, config)
+    const request = ProductsService.getData(`/card/${id}/${idP}`, config)
     const data = await (await request).data
     console.log(data)
     dispatch(setCard({ data }))

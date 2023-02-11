@@ -1,6 +1,6 @@
 import { useCustomSelector, useCustomDispatch } from "../hooks/redux"
 import { setCard, setNotCard } from "../redux/slice/auth";
-import { getData } from '../services';
+import ProductsService from '../services/Products/ProductsService'
 import toast, { Toaster } from 'react-hot-toast';
 
 const ProductCard = ({Name,description,picturePath,price,_id}: any) => {
@@ -17,7 +17,7 @@ const ProductCard = ({Name,description,picturePath,price,_id}: any) => {
           Authorization: `Bearer ${token}`
         }
       }
-      const request = getData(`/card/${id}/${idP}`, config)
+      const request = ProductsService.getData(`/card/${id}/${idP}`, config)
       const data = await (await request).data
       console.log(data)
       toast.success('Successfully Added!')
