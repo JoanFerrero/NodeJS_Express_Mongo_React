@@ -1,6 +1,7 @@
 import { useEffect, useState, ReactNode } from "react";
 import { ProductsContext } from "./ProductsContext";
 import ProductsService from '../services/Products/ProductsService'
+import { Product } from "../types/types";
 
 
 interface Props {
@@ -8,22 +9,26 @@ interface Props {
 }
 
 export const PokemonProvider = ({ children }: Props) => {
-  const [offset, setOffset] = useState(0);
+  const [skip, setSkip] = useState(0);
+	const [isEnd, setIsEnd] = useState(false);
+  const [products, setProducts] = useState<Array<Product>>([])
 
-  const getAllProducts = (limit = 9) => {
-    ProductsService.getData1('/products?skip=1')
+
+  const getAllProducts = () => {
+    ProductsService.getData1(`/products?skip=${skip}`)
       .then(({data}) => {
-        console.log(data)
+        if(data.length < 6) setIsEnd(true)
+        setProducts(products.concat(data))
       })
   }
 
   useEffect(() => {
     getAllProducts()
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [offset])
+  }, [skip])
   
   return (
-    <ProductsContext.Provider value={{ getAllProducts}}>
+    <ProductsContext.Provider value={{ setSkip, setIsEnd, isEnd, skip, products}}>
       {children}
     </ProductsContext.Provider>
   )
