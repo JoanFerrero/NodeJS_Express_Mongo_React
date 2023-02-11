@@ -12,6 +12,7 @@ export const PokemonProvider = ({ children }: Props) => {
   const [skip, setSkip] = useState(0);
 	const [isEnd, setIsEnd] = useState(false);
   const [products, setProducts] = useState<Array<Product>>([])
+  const [pageType, setPageType] = useState("login");
 
 
   const getAllProducts = () => {
@@ -28,7 +29,7 @@ export const PokemonProvider = ({ children }: Props) => {
   }, [skip])
   
   return (
-    <ProductsContext.Provider value={{ setSkip, setIsEnd, isEnd, skip, products}}>
+    <ProductsContext.Provider value={{ setSkip, setIsEnd, setPageType, isEnd, skip, products, pageType}}>
       {children}
     </ProductsContext.Provider>
   )

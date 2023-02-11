@@ -1,5 +1,7 @@
 export interface ProductContextType {
   setSkip:(value: number) => void
+  setPageType: (value: string) => void
+  pageType: tring
   skip: number
   isEnd: boolean
   products: Array<Product>

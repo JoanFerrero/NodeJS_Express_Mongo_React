@@ -1,54 +1,21 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { setLogin, setCard, setId } from "../redux/slice/auth";
-import { useCustomDispatch, useCustomSelector } from "../hooks/redux";
-import { postData, getData } from "../services";
+import {  useCustomSelector } from "../hooks/redux";
+import { ProductsContext } from "../context/ProductsContext";
+import { useContext } from "react";
+import { ProductContextType } from "../types/types";
+import { useForm } from "../hooks/useForm";
 
 const FormLogin = () => {
-  const [pageType, setPageType] = useState("login");
+  const { pageType, setPageType } = useContext(ProductsContext) as ProductContextType;
+  const { login, register} = useForm()
   const [values, setValues] = useState({});
-  const navigate = useNavigate();
-  const dispatch = useCustomDispatch();
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
   const { auth } = useCustomSelector((state) => state)
   const isColor = auth.mode
-
-  const register = async (values: {}) => {
-    const savedUserResponse = postData("/auth/register", values);
-    const savedUser = (await savedUserResponse).data
-
-    if (savedUser) {
-      setPageType("login");
-    }
-  }
-
-  const login = async (values: {}) => {
-    const loggedInResponse = postData("/auth/login", values)
-    const loggedIn = (await loggedInResponse).data
-    if (!loggedIn.msg) {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${loggedIn.token}`
-        }
-      }
-      const request = getData(`/card/${loggedIn.user.id}`, config)
-      const data = (await request).data
-
-      dispatch(
-        setLogin({
-          user: loggedIn.user,
-          token: loggedIn.token,
-        })
-      );
-      dispatch(setId({ id: loggedIn.user.id}))
-      dispatch(setCard({ data }))
-      navigate("/home");
-    }
-  }
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
