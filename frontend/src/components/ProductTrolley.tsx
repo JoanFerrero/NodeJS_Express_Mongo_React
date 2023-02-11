@@ -23,6 +23,7 @@ const ProductTrolley = () => {
     }
     const request = getData(`/card/${id}/${idP}`, config)
     const data = await (await request).data
+    console.log(data)
     dispatch(setCard({ data }))
     toast.promise(request, {
       loading: 'Loading',

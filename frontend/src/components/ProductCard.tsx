@@ -19,6 +19,7 @@ const ProductCard = ({Name,description,picturePath,price,_id}: any) => {
       }
       const request = getData(`/card/${id}/${idP}`, config)
       const data = await (await request).data
+      console.log(data)
       toast.success('Successfully Added!')
       dispatch(setCard({ data }))
     } else {
