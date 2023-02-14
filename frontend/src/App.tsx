@@ -4,7 +4,7 @@ import store, { persistor }from "./redux/store"
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react'
 import FooterPage from "./pages/footer";
-import { PokemonProvider} from "./context/ProductsProvider"
+import { ProductProvider } from "./context/ProductsProvider"
 import React, { Suspense } from "react";
 function App() {
   const HomePage = React.lazy(() => import('./pages/homePage'))
@@ -16,7 +16,7 @@ function App() {
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <Suspense fallback={true}>
-          <PokemonProvider>
+          <ProductProvider>
             <NavBar />
             <BrowserRouter>
               <Routes>
@@ -29,7 +29,7 @@ function App() {
               </Routes>
             </BrowserRouter>
             <FooterPage />
-          </PokemonProvider>
+          </ProductProvider>
         </Suspense>
       </PersistGate>
     </Provider>

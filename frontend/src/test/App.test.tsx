@@ -6,6 +6,9 @@ import ProductCard from '../components/ProductCard';
 import { ButtonWrapper, Counter, APIComponent, useCounter } from '../components/RefactorPage';
 import { Provider } from 'react-redux';
 import store from '../redux/store';
+import ProductTrolley from '../components/ProductTrolley';
+import { ProductProvider } from '../context/ProductsProvider';
+import { BrowserRouter } from 'react-router-dom';
 
 test('handles onClick', () => {
   const onClick = jest.fn()
@@ -23,6 +26,19 @@ test('handles onClick counter', () => {
   fireEvent.click(buttonElement)
   fireEvent.click(buttonElement)
   expect(divElement).toHaveTextContent("Count is 3")
+})
+
+test('render ProductTrolley', () => {
+  render (
+    <Provider store={store}>
+      <ProductProvider>
+        <BrowserRouter>
+          <ProductTrolley />
+        </BrowserRouter>
+      </ProductProvider>
+    </Provider>
+  )
+
 })
 
 test('gets the data', async () => {
@@ -53,9 +69,6 @@ test('productCard test', () => {
   const linkEkement = screen.getByText("Joan")
   expect(linkEkement).toBeInTheDocument()
 })
-
-
-
 
 // test('render content', () => {
 //   render(<UserImage user="pepe" image="camion" />)

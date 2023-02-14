@@ -8,7 +8,7 @@ interface Props {
   children: ReactNode
 }
 
-export const PokemonProvider = ({ children }: Props) => {
+export const ProductProvider = ({ children }: Props) => {
   const [skip, setSkip] = useState(0);
 	const [isEnd, setIsEnd] = useState(false);
   const [products, setProducts] = useState<Array<Product>>([])
