@@ -12,20 +12,30 @@ const FormLogin = () => {
   const { pageType, setPageType } = useContext(ProductsContext) as ProductContextType;
   const { login, register} = useForm()
   const [values, setValues] = useState({});
+  const [validated, setValidated] = useState(false);
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
   const { auth } = useCustomSelector((state) => state)
   const isColor = auth.mode
 
-  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    isLogin && login(values)
-    isRegister && register(values)
-  };
-
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [event.target.name]: event.target.value });
   }
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    console.log(form.checkValidity())
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+      setValidated(true);
+    }
+    if(form.checkValidity() === true){
+      isLogin && login(values)
+      isRegister && register(values)
+    }
+  };
 
   return (
     <div className={`bg-${isColor} grid grid-rows-2 grid-flow-col gap-4`}>
@@ -33,11 +43,11 @@ const FormLogin = () => {
           <img className='w-full h-full object-cover' src='https://games-assets.crossfit.com/s3fs-public/styles/sizzle/public/FS1_8312%20%281%29.jpg?itok=eUGysway' alt="" />
       </div>
       <div className="row-span-1 mt-4">
-        <Form onSubmit={onSubmit}>
+        <Form noValidate validated={validated} onSubmit={handleSubmit}>
           {isRegister && (
             <>
               <Form.Group>
-                <Form.Label>First Name</Form.Label>
+                <Form.Label></Form.Label>
                 <Form.Control 
                   name='firstName'
                   type="text" 
@@ -47,7 +57,7 @@ const FormLogin = () => {
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label>Last Name</Form.Label>
+                <Form.Label></Form.Label>
                 <Form.Control
                   name='lastName'
                   type="text" 
@@ -57,7 +67,7 @@ const FormLogin = () => {
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label>Location</Form.Label>
+                <Form.Label></Form.Label>
                 <Form.Control
                   name='location'
                   type="text" 
@@ -67,7 +77,7 @@ const FormLogin = () => {
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label>Email address</Form.Label>
+                <Form.Label></Form.Label>
                 <Form.Control
                   name='emailreg'
                   type="email" 
@@ -76,8 +86,8 @@ const FormLogin = () => {
                   onChange={onChange}
                 />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
+              <Form.Group className="mb-3">
+                <Form.Label></Form.Label>
                 <Form.Control
                   name='passwordreg'
                   type="password" 
@@ -90,8 +100,8 @@ const FormLogin = () => {
           )}
           {isLogin && (
             <>
-              <Form.Group>
-                <Form.Label>Email</Form.Label>
+              <Form.Group controlId="validationCustom01">
+                <Form.Label></Form.Label>
                 <Form.Control 
                   name='emaillog'
                   type="email" 
@@ -99,9 +109,10 @@ const FormLogin = () => {
                   required 
                   onChange={onChange}
                 />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
+              <Form.Group className="mb-3" >
+                <Form.Label></Form.Label>
                 <Form.Control
                   name='passwordlog'
                   type="password" 

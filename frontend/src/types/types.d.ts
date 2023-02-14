@@ -9,12 +9,12 @@ export interface ProductContextType {
 
 export interface Product {
   Name: string;
-  createdAt: string;
+  createdAt?: string;
   description: string;
   picturePath: string;
   price: number;
-  updatedAt: string;
-  __v: number;
+  updatedAt?: string;
+  __v?: number;
   _id: string;
 }
 

@@ -26,7 +26,7 @@ const ShopPage = () => {
             price,
             _id,
           }: Product) => (
-            <ProductCard name={Name} description={description} picturePath={picturePath} price={price} _id={_id}/>
+            <ProductCard Name={Name} description={description} picturePath={picturePath} price={price} _id={_id}/>
           ))}
         </div>
       </div>

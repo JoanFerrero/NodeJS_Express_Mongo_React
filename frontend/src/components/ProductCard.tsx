@@ -2,8 +2,10 @@ import { useCustomSelector, useCustomDispatch } from "../hooks/redux"
 import { setCard, setNotCard } from "../redux/slice/auth";
 import ProductsService from '../services/Products/ProductsService'
 import toast, { Toaster } from 'react-hot-toast';
+import { Product } from "../types/types";
 
-const ProductCard = ({Name,description,picturePath,price,_id}: any) => {
+const ProductCard = ({Name,description,picturePath,price,_id}: Product) => {
+  
   const { auth } = useCustomSelector((state) => state);
   const dispatch = useCustomDispatch();
   const token = auth.token
