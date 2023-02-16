@@ -1,14 +1,11 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { renderHook, act } from '@testing-library/react';
 import ProductCard from '../components/ProductCard';
 import { ButtonWrapper, Counter, APIComponent, useCounter } from '../components/RefactorPage';
 import { Provider } from 'react-redux';
 import store from '../redux/store';
-import ProductTrolley from '../components/ProductTrolley';
-import { ProductProvider } from '../context/ProductsProvider';
-import { BrowserRouter } from 'react-router-dom';
 
 test('handles onClick', () => {
   const onClick = jest.fn()
@@ -28,17 +25,15 @@ test('handles onClick counter', () => {
   expect(divElement).toHaveTextContent("Count is 3")
 })
 
-test('render ProductTrolley', () => {
+test('render ProductCard', () => {
   render (
     <Provider store={store}>
-      <ProductProvider>
-        <BrowserRouter>
-          <ProductTrolley />
-        </BrowserRouter>
-      </ProductProvider>
+      <ProductCard Name='Rings' _id='233' description='Lorem, ipsum dolor sit amet consectetur adipisicing elit.' picturePath='Anillas.jpg' price={50} />
     </Provider>
   )
 
+  const buttonEkement = screen.getByText("no")
+  expect(buttonEkement).toBeInTheDocument()
 })
 
 test('gets the data', async () => {

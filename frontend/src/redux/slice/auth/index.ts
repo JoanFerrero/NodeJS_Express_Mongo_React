@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Product } from "../../../types/types";
 
 export interface AuthState{
   mode: string,
   id: String | null,
   user: String | null,
   token: String | null,
-  card: Array<Object>
+  card: Array<Product>
 }
 
 const initialState: AuthState = {

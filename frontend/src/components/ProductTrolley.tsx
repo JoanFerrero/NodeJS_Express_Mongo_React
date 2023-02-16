@@ -1,6 +1,7 @@
 import { useCustomSelector } from "../hooks/redux";
 import { Toaster } from 'react-hot-toast';
 import { useTrolley } from '../hooks/useTrolley'
+import { Product } from "../types/types";
 
 const ProductTrolley = () => {
 
@@ -9,11 +10,10 @@ const ProductTrolley = () => {
   const products = auth.card
   let finalprice = 0
 
-
-
   products.map(({price}: any) => (
     finalprice = finalprice + price
   ))
+  
   return (
     <>
       <Toaster />
@@ -30,28 +30,23 @@ const ProductTrolley = () => {
             <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">Total</h3>
           </div>
           {products.map(
-            ({
-              Name,
-              picturePath,
-              price,
-              _id,
-            }: any) => (
+            (product: Product) => (
               <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
                 <div className="flex w-2/5">
                   <div className="w-20">
-                    <img className="h-24" src={`http://localhost:3001/assets/${picturePath}`} alt="" />
+                    <img className="h-24" src={`http://localhost:3001/assets/${product.picturePath}`} alt="" />
                   </div>
                   <div className="flex flex-col justify-between ml-4 flex-grow">
-                    <span className="font-bold text-sm">{Name}</span>
+                    <span className="font-bold text-sm">{product.Name}</span>
                     <span className="text-red-500 text-xs">NOBULL</span>
-                    <span onClick={() => removeProd(_id)}  className="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</span>
+                    <span onClick={() => removeProd(product._id)}  className="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</span>
                   </div>
                 </div>
                 <div className="flex justify-center w-1/5">
-                  <input className="mx-2 border text-center w-8" type="text" value="1" />
+                  <input className="mx-2 border text-center w-8" type="text" defaultValue={"1"}/>
                 </div>
-                <span className="text-center w-1/5 font-semibold text-sm">{price} €</span>
-                <span className="text-center w-1/5 font-semibold text-sm">{price} €</span>
+                <span className="text-center w-1/5 font-semibold text-sm">{product.price} €</span>
+                <span className="text-center w-1/5 font-semibold text-sm">{product.price} €</span>
               </div>
               )
             )

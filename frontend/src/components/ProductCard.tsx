@@ -3,6 +3,8 @@ import { setCard, setNotCard } from "../redux/slice/auth";
 import ProductsService from '../services/Products/ProductsService'
 import toast from 'react-hot-toast';
 import { Product } from "../types/types";
+import { MdAddShoppingCart, MdRemoveShoppingCart } from "react-icons/md";
+
 
 const ProductCard = ({Name,description,picturePath,price,_id}: Product) => {
   
@@ -10,6 +12,7 @@ const ProductCard = ({Name,description,picturePath,price,_id}: Product) => {
   const dispatch = useCustomDispatch();
   const token = auth.token
   const id = auth.id
+  const card = auth.card
 
   const addProd = async (idP: String) => {
     if(id) {
@@ -28,6 +31,11 @@ const ProductCard = ({Name,description,picturePath,price,_id}: Product) => {
       toast.error('Need Login!')
     }
   }
+  const checkProductInCart = (id: string) => {
+    return card.some(item => item._id === id)
+  }
+
+  const isProductInCart = checkProductInCart(_id)
 
   return (
     <>
@@ -38,7 +46,7 @@ const ProductCard = ({Name,description,picturePath,price,_id}: Product) => {
           <p className="text-slate-500 dark:text-slate-400 mt-2 text-sm">{description}</p>
           <p className="text-slate-500 dark:text-slate-400 mt-2 text-sm">{price} €</p>
           <div className="card-actions justify-end">
-            <button className="btn btn-primary" onClick={() => addProd(_id)}>Add Card</button>
+            <button className="btn btn-primary" onClick={() => addProd(_id)}>{isProductInCart ? <MdRemoveShoppingCart /> : <MdAddShoppingCart />}</button>
           </div>
         </div>
       </div>
