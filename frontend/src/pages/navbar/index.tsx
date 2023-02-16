@@ -18,7 +18,6 @@ function NavBar() {
 
   const logout = () => {
     dispatch(setLogout());
-    window.location.href = 'home'
   }
 
   return (

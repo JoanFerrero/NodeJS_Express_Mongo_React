@@ -4,6 +4,7 @@ import ProductsService from '../services/Products/ProductsService'
 import toast from 'react-hot-toast';
 import { Product } from "../types/types";
 import { MdAddShoppingCart, MdRemoveShoppingCart } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 
 const ProductCard = ({Name,description,picturePath,price,_id}: Product) => {
@@ -13,6 +14,7 @@ const ProductCard = ({Name,description,picturePath,price,_id}: Product) => {
   const token = auth.token
   const id = auth.id
   const card = auth.card
+  const navigate = useNavigate()
 
   const addProd = async (idP: String) => {
     if(id) {
@@ -25,12 +27,16 @@ const ProductCard = ({Name,description,picturePath,price,_id}: Product) => {
       const request = ProductsService.getData(`/card/${id}/${idP}`, config)
       const data = await (await request).data
       console.log(data)
-      toast.success('Successfully Added!')
+      toast.success('Successfully!')
       dispatch(setCard({ data }))
     } else {
       toast.error('Need Login!')
+      setTimeout(() => { 
+        navigate("/login") 
+      }, 2000)
     }
   }
+
   const checkProductInCart = (id: string) => {
     return card.some(item => item._id === id)
   }

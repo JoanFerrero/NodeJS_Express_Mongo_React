@@ -11,15 +11,16 @@ export function useTrolley () {
   const token = auth.token
   const id = auth.id
   const navigate = useNavigate()
-
-  const removeProd = async (idP: String) => {
-    dispatch(setNotCard())
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
     }
+  }
+
+  const removeAddProd = async (idP: String) => {
+    dispatch(setNotCard())
     const request = ProductsService.getData(`/card/${id}/${idP}`, config)
+    console.log(`/card/${id}/${idP}`)
     const data = await (await request).data
     console.log(data)
     dispatch(setCard({ data }))
@@ -30,14 +31,16 @@ export function useTrolley () {
     });
   }
 
-  const endShop = () => {
+  const endShop = async () => {
     toast.success('Thank you for trusting Nobull!')
-
+    const request = ProductsService.getData(`/cardelete/63c2cca9a8f24bc3da45f429`, config)
+    const data = (await request).data
+    console.log(data)
     setTimeout(() => { 
+      dispatch(setCard({ data }))
       navigate("/shop") 
-      dispatch(setNotCard())
-    }, 3000)
+    }, 1000)
   }
 
-  return {removeProd, endShop}
+  return {removeAddProd, endShop}
 }

@@ -12,11 +12,16 @@ const getData1 = async (url: string) => {
   return Api().get(url);
 }
 
+const removeData = async (url: string, values: {}) => {
+  return Api().put(url, values);
+}
+
 
 const PokemonService = {
   postData,
   getData,
-  getData1
+  getData1,
+  removeData
 }
 
 export default PokemonService

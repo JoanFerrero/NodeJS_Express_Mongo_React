@@ -42,3 +42,19 @@ export const addRemoveCard = async (req, res) => {
 
   res.status(200).json(products);
 }
+
+export const removeAllCard = async (req, res) => {
+  const { id } = req.params;
+  const idToken = req.user;
+  if (id !== idToken.id) {
+    console.log(id)
+    return res.status(403).send("Access Denied");
+  }
+  
+  const user = await User.findById(id);
+  user.card = user.card.slice(0, 0)
+
+  await user.save();
+
+  res.status(200).json(user.card);
+}

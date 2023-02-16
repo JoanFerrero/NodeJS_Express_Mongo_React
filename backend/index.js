@@ -12,6 +12,7 @@ import authRoutes from "./routes/auth.js"
 import userRoutes from "./routes/users.js"
 import productRoutes from "./routes/products.js"
 import productCard from "./routes/card.js"
+import productCardDelete from "./routes/cardelete.js"
 import { register } from "./controllers/auth.js"
 import { createProducts } from "./controllers/products.js";
 import { verifyToken } from "./middleware/auth.js";
@@ -50,6 +51,7 @@ app.use("/auth", authRoutes)
 app.use("/users", userRoutes)
 app.use("/products", productRoutes)
 app.use("/card", productCard)
+app.use("/cardelete", productCardDelete)
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 6001

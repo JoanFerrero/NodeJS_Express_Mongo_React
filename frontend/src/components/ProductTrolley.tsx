@@ -5,7 +5,7 @@ import { Product } from "../types/types";
 
 const ProductTrolley = () => {
 
-  const { endShop, removeProd} = useTrolley()
+  const { endShop, removeAddProd} = useTrolley()
   const { auth } = useCustomSelector((state) => state);
   const products = auth.card
   let finalprice = 0
@@ -39,7 +39,7 @@ const ProductTrolley = () => {
                   <div className="flex flex-col justify-between ml-4 flex-grow">
                     <span className="font-bold text-sm">{product.Name}</span>
                     <span className="text-red-500 text-xs">NOBULL</span>
-                    <span onClick={() => removeProd(product._id)}  className="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</span>
+                    <span onClick={() => removeAddProd(product._id)}  className="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</span>
                   </div>
                 </div>
                 <div className="flex justify-center w-1/5">
