@@ -38,11 +38,11 @@ const FormLogin = () => {
   };
 
   return (
-    <div className={`bg-${isColor} grid grid-rows-2 grid-flow-col gap-4`}>
-      <div className='hidden sm:block row-span-2'>
+    <div className={`bg-${isColor} grid grid-rows-1 grid-flow-col gap-2`}>
+      <div className='hidden sm:block row-span-2' style={{width: '50rem'}}>
           <img className='w-full h-full object-cover' src='https://games-assets.crossfit.com/s3fs-public/styles/sizzle/public/FS1_8312%20%281%29.jpg?itok=eUGysway' alt="" />
       </div>
-      <div className="row-span-1 mt-4">
+      <div className="row-span-1 mt-4" style={{width: '50rem'}}>
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           {isRegister && (
             <>
@@ -137,9 +137,6 @@ const FormLogin = () => {
             </Form.Text>
           </Form.Group>
         </Form>
-        </div>
-        <div className="">
-          <img src="https://open.crossfit.com/wp-content/uploads/2022/11/23-OPEN-LOGO_WHITE-BKGD.jpg" alt="" />
         </div>
     </div>
   )

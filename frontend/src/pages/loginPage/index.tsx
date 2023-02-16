@@ -10,7 +10,7 @@ const LoginPage = (props: Props) => {
   const isColor = auth.mode
 
   return (
-    <div className={`bg-${isColor}`} style={{width: '100%', padding: '2rem'}}>
+    <div className={`bg-${isColor}`} style={{width: '100%', padding: '8rem'}}>
       <FormLogin />
     </div>
   )

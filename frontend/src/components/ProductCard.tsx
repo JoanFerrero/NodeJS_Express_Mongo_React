@@ -1,7 +1,7 @@
 import { useCustomSelector, useCustomDispatch } from "../hooks/redux"
 import { setCard, setNotCard } from "../redux/slice/auth";
 import ProductsService from '../services/Products/ProductsService'
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { Product } from "../types/types";
 
 const ProductCard = ({Name,description,picturePath,price,_id}: Product) => {
@@ -31,7 +31,6 @@ const ProductCard = ({Name,description,picturePath,price,_id}: Product) => {
 
   return (
     <>
-      <Toaster />
       <div className="card w-96 bg-base-100 shadow-xl" id={_id}>
         <figure><img src={`http://localhost:3001/assets/${picturePath}`} alt="Shoes" /></figure>
         <div className="card-body">

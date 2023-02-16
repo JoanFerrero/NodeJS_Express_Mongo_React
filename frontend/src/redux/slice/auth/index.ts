@@ -5,7 +5,6 @@ export interface AuthState{
   id: String | null,
   user: String | null,
   token: String | null,
-  products: Array<Object>
   card: Array<Object>
 }
 
@@ -14,7 +13,6 @@ const initialState: AuthState = {
   id: null,
   user: null,
   token: null,
-  products: [],
   card: [],
 }
 
@@ -38,9 +36,6 @@ const authSlice = createSlice({
       state.card = []
       state.id = null
     },
-    setProducts: (state, action) => {
-      state.products = action.payload.data;
-    },
     setCard: (state, action) => {
       state.card = action.payload.data;
     },
@@ -50,6 +45,6 @@ const authSlice = createSlice({
   },
 })
 
-export const { setMode, setId, setLogin, setLogout, setProducts , setCard, setNotCard} = authSlice.actions
+export const { setMode, setId, setLogin, setLogout , setCard, setNotCard} = authSlice.actions
 
 export default authSlice.reducer

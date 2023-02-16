@@ -6,7 +6,7 @@ import authReducer from './slice/auth'
 const persistAuthConfig = {
   key: 'auth',
   storage,
-  whitelist: ['mode','user','token','products', 'card', 'id']
+  whitelist: ['mode','user','token', 'card', 'id']
 }
 
 export const store = configureStore({
