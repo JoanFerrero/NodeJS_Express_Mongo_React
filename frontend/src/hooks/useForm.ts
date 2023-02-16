@@ -40,7 +40,7 @@ export function useForm () {
   const register = async (values: {}) => {
     const savedUserResponse = ProductsService.postData("/auth/register", values);
     const savedUser = (await savedUserResponse).data
-
+    console.log(savedUser)
     if (savedUser) {
       setPageType("login");
     }
