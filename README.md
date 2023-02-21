@@ -37,7 +37,6 @@ Lista de tecnologías utilizadas en este proyecto:
 `Frontend` 🏛️
 
 - [React](https://reactjs.org/) v18.2.0
-  - Hooks
   - Routing
   - Hooks
     - UseContext
