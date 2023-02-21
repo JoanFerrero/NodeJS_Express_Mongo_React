@@ -18,12 +18,6 @@ Por [`Joan Ferrero Montiel`](https://github.com/JoanFerrero)
 - [React](https://reactjs.org/) v18.2.0
 - [Express](https://expressjs.com/) v4.18.2
 
-Tras clonar este repositorio con 'git clone' (por ejemplo), ejecutar el siguiente comando:
-
-```
-npm install
-```
-
 ## Funciones ⚡
 
 ---
